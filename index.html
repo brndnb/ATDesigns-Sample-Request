@@ -7,17 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Sample Request Form</h1>
-<input type="text" placeholder="Customer Name">
-<textarea></textarea>
-<select>
-    <option></option>
-</select>
-<h2 class="description" id="description"></h2>
-<h2 class="tariff" id="tariff"></h2>
-
-
-<script src="script.js"></script>
-    
+    <h1>Sample Request Form</h1>
+    <form id="sampleRequestForm">
+        <label for="itemSelect">Select Item:</label>
+        <select id="itemSelect" name="itemSelect"></select>
+        <br><br>
+        <label for="descriptionField">Description:</label>
+        <input type="text" id="descriptionField" name="descriptionField" size="50">
+        <br><br>
+        <label for="tariffField">HS Tariff:</label>
+        <input type="text" id="tariffField" name="tariffField" size="12" readonly>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+<script src="script.js"></script>    
 </body>
 </html>

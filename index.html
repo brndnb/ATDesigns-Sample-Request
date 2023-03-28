@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Sample Request Form</h1>
+    
     <form id="sampleRequestForm">
+        <h1>Sample Request Form</h1>
         <div class="address-container">
             <!-- Add Customer Name field -->
-            <label for="customerName">Customer Name:</label>
-            <input type="text" id="customerName" name="customerName" placeholder="Customer Name" class="form-box cust-name">
+            <label for="customerName"><strong>Customer Name:</strong></label>
+            <input type="text" id="customerName" name="customerName" placeholder="Enter customer name..." class="form-box cust-name no-border">
                         
             <!-- Add Ship To Address field -->
-            <label for="shipToAddress">Ship To Address:</label>
-            <textarea id="shipToAddress" name="shipToAddress"  cols="30" placeholder="Ship To Address" class="form-box cust-addr"></textarea>
+            <label for="shipToAddress"><strong>Ship To Address:</strong></label>
+            <textarea id="shipToAddress" name="shipToAddress"  cols="30" placeholder="Enter address..." class="form-box cust-addr no-border"></textarea>
             
         </div>
         <div class="top-container">
 
             
-            <div class="custom-select" style="width: 600px;">
+            <div class="custom-select no-print" style="width: 600px;">
                 <input type="text" id="searchInput" placeholder="Search items..." autocomplete="off">
                 <div id="itemSelect" class="select-items"></div>  
             </div>
-            <input class="form-box quantity" type="text" id="quantity" name="quantity" placeholder="QTY">
-            <button id="line-item-btn">Add</button>
+            <input class="form-box quantity no-print" type="text" id="quantity" name="quantity" placeholder="QTY">
+            <button id="line-item-btn" class="no-print">Add</button>
         </div>
         
         
@@ -37,10 +38,10 @@
             <label for="tariffField">HS Tariff:</label>
             <input type="text" id="tariffField" name="tariffField" size="12" class="no-border" readonly> -->
         <div class="bottom-container">
-            <h4>Line Items:</h4>
+            <h4>Sample(s) Added:</h4>
             <div id="line-items-container"></div>
             
-            <button type="submit">Submit</button>
+            <button type="button" id="print-btn" class="no-print">Print</button>
         </div>
     </form>
     

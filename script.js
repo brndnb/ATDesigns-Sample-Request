@@ -75,7 +75,7 @@
     }
     const lineItem = document.createElement('p');
     lineItem.id = lineItemId;
-    lineItem.innerHTML = `${itemId} - HS Tariff (${hsTariff}) - QTY (${quantity} pieces)`;
+    lineItem.innerHTML = `${itemId} - HS Tariff (${hsTariff}) - QTY (<strong>${quantity} pieces</strong>)`;
     // Add the line item to the container
     lineItemDiv.appendChild(lineItem);
     searchInput.value = "";
@@ -84,3 +84,10 @@
   
 // Add event listener to button to add line item
 lineItemBtn.addEventListener('click', addLineItem);
+
+
+const printBtn = document.getElementById('print-btn');
+
+printBtn.addEventListener('click', () => {
+  window.print();
+});

@@ -1,114 +1,86 @@
-const items = [
-    {
-        "ItemId": "SAMPLE 100",
-        "Description": "PREPRODUCTION SAMPLE LAPEL PIN",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 100PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER  LAPEL",
-        "HS_Tariff": "7117119000"
-    },
-    {
-        "ItemId": "SAMPLE 650PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER BELT BUCKLE",
-        "HS_Tariff": "8308906000"
-    },
-    {
-        "ItemId": "SAMPLE 650Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC BELT BUCKLE",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 890PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER KEY TAG ",
-        "HS_Tariff": "7326200070"
-    },
-    {
-        "ItemId": "SAMPLE 890Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC KEY TAG",
-        "HS_Tariff": "7326200070"
-    },
-    {
-        "ItemId": "SAMPLE 909PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER DOG TAG",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 909Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC DOG TAG",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 910PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER MEDAL",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 910Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC MEDAL",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 911PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER PLAQUE",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 911Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC PLAQUE ME",
-        "HS_Tariff": "7117199000"
-    },
-    {
-        "ItemId": "SAMPLE 920PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER KEY TO CITY",
-        "HS_Tariff": "8306290000"
-    },
-    {
-        "ItemId": "SAMPLE 940PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER BAG TAG",
-        "HS_Tariff": "8007005000"
-    },
-    {
-        "ItemId": "SAMPLE 940Z",
-        "Description": "PREPRODUCTION SAMPLE ZINC BAG TAG",
-        "HS_Tariff": "8306290000"
-    },
-    {
-        "ItemId": "SAMPLE 950PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER XMAS ORNAMENT",
-        "HS_Tariff": "9505102500"
-    },
-    {
-        "ItemId": "SAMPLE PW",
-        "Description": "PREPRODUCTION SAMPLE PEWTER GIFT AC",
-        "HS_Tariff": "9505102500"
+
+  
+  const itemSelect = document.getElementById('itemSelect');
+  const tariffField = document.getElementById('tariffField');
+  const descriptionField = document.getElementById("descriptionField");
+  const lineItemDiv = document.getElementById("line-items-container");
+  const lineItemBtn = document.getElementById("line-item-btn");
+  const quantityField = document.getElementById("quantity");
+  
+  // Create custom dropdown options
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.setAttribute('data-value', item.ItemId);
+    div.textContent = item.ItemId;
+    itemSelect.appendChild(div);
+  });
+  
+  // Handle custom dropdown item selection and search
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', event => {
+    const searchText = event.target.value.toLowerCase();
+    const options = itemSelect.querySelectorAll('div');
+  
+    options.forEach(option => {
+      if (option.textContent.toLowerCase().indexOf(searchText) > -1) {
+        option.style.display = '';
+      } else {
+        option.style.display = 'none';
+      }
+    });
+  });
+  
+  searchInput.addEventListener('focus', () => {
+    itemSelect.style.display = 'block';
+  });
+  
+  searchInput.addEventListener('blur', () => {
+    setTimeout(() => {
+      itemSelect.style.display = 'none';
+    }, 150);
+  });
+  
+  itemSelect.addEventListener('click', event => {
+    if (event.target.tagName === 'DIV') {
+      const selectedItemId = event.target.getAttribute('data-value');
+      const selectedItem = items.find(item => item.ItemId === selectedItemId);
+  
+      if (selectedItem) {
+        searchInput.value = selectedItem.ItemId;
+        tariffField.value = selectedItem.HS_Tariff;
+        descriptionField.value = selectedItem.Description;
+      }
     }
-]
-
-
-
-const itemSelect = document.getElementById('itemSelect');
-const tariffField = document.getElementById('tariffField');
-const descriptionField = document.getElementById("descriptionField");
-
-// Populate dropdown list with item options
-items.forEach(item => {
-  const option = document.createElement('option');
-  option.value = item.ItemId;
-  option.text = item.ItemId;
-  itemSelect.add(option);
-});
-
-// Handle item selection
-itemSelect.addEventListener('change', event => {
-  const selectedItemId = event.target.value;
-  const selectedItem = items.find(item => item.ItemId === selectedItemId);
-  tariffField.value = selectedItem.HS_Tariff;
-  descriptionField.value = selectedItem.Description;
-});
-
-
-
-
-
+  });
+  
+  // Add line item to container
+  function addLineItem(event) {
+    event.preventDefault(); // prevent form submission
+    // Get selected item and its values
+    const selectedItemId = searchInput.value;
+    const selectedItem = items.find(item => item.ItemId === selectedItemId);
+    if (!selectedItem) {
+      // handle the case where the selected item is not found
+      return;
+    }
+    const itemName = selectedItem.Description;
+    const itemId = selectedItem.ItemId;
+    const hsTariff = selectedItem.HS_Tariff;
+    const quantity = quantityField.value || 1; // get quantity value or default to 1
+    // Create a new paragraph element with the item name, HS Tariff, and quantity
+    const lineItemId = `line-item-${selectedItemId}-${hsTariff}-${itemId}`;
+    if (document.getElementById(lineItemId)) {
+      // A line item with the same ID already exists, so don't add a new one
+      return;
+    }
+    const lineItem = document.createElement('p');
+    lineItem.id = lineItemId;
+    lineItem.innerHTML = `${itemId} - HS Tariff (${hsTariff}) - QTY (${quantity} pieces)`;
+    // Add the line item to the container
+    lineItemDiv.appendChild(lineItem);
+    searchInput.value = "";
+    quantityField.value = "";
+  }
+  
+// Add event listener to button to add line item
+lineItemBtn.addEventListener('click', addLineItem);

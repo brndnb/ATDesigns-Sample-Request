@@ -4,22 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Sample Request Form</h1>
     <form id="sampleRequestForm">
-        <label for="itemSelect">Select Item:</label>
-        <select id="itemSelect" name="itemSelect"></select>
-        <br><br>
-        <label for="descriptionField">Description:</label>
-        <input type="text" id="descriptionField" name="descriptionField" size="50">
-        <br><br>
-        <label for="tariffField">HS Tariff:</label>
-        <input type="text" id="tariffField" name="tariffField" size="12" readonly>
-        <br><br>
-        <button type="submit">Submit</button>
+        <div class="address-container">
+            <!-- Add Customer Name field -->
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" placeholder="Customer Name" class="form-box cust-name">
+                        
+            <!-- Add Ship To Address field -->
+            <label for="shipToAddress">Ship To Address:</label>
+            <textarea id="shipToAddress" name="shipToAddress"  cols="30" placeholder="Ship To Address" class="form-box cust-addr"></textarea>
+            
+        </div>
+        <div class="top-container">
+
+            
+            <div class="custom-select" style="width: 600px;">
+                <input type="text" id="searchInput" placeholder="Search items..." autocomplete="off">
+                <div id="itemSelect" class="select-items"></div>  
+            </div>
+            <input class="form-box quantity" type="text" id="quantity" name="quantity" placeholder="QTY">
+            <button id="line-item-btn">Add</button>
+        </div>
+        
+        
+            <!-- <label for="descriptionField">Description:</label>
+            <input type="text" id="descriptionField" name="descriptionField" size="50" class="no-border">
+            
+            <label for="tariffField">HS Tariff:</label>
+            <input type="text" id="tariffField" name="tariffField" size="12" class="no-border" readonly> -->
+        <div class="bottom-container">
+            <h4>Line Items:</h4>
+            <div id="line-items-container"></div>
+            
+            <button type="submit">Submit</button>
+        </div>
     </form>
-<script src="script.js"></script>    
+    
+    <script src="items.js"></script>
+    <script src="script.js"></script> 
 </body>
 </html>

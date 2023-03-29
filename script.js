@@ -86,8 +86,21 @@
 lineItemBtn.addEventListener('click', addLineItem);
 
 
+//Add event listener for print button on click
 const printBtn = document.getElementById('print-btn');
 
 printBtn.addEventListener('click', () => {
   window.print();
 });
+
+//Add event listener for clear form button
+
+const clearBtn = document.getElementById('clear-btn');
+
+clearBtn.addEventListener('click', () => {
+  document.getElementById('sampleRequestForm').reset();
+  document.getElementById('line-items-container').innerHTML = '';
+});
+
+
+

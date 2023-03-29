@@ -9,6 +9,7 @@
 <body>
     
     <form id="sampleRequestForm">
+        <img src="./images/ATDesigns.gif" alt="logo">
         <h1>Sample Request Form</h1>
         <div class="address-container">
             <!-- Add Customer Name field -->
@@ -19,6 +20,9 @@
             <label for="shipToAddress"><strong>Ship To Address:</strong></label>
             <textarea id="shipToAddress" name="shipToAddress"  cols="30" placeholder="Enter address..." class="form-box cust-addr no-border"></textarea>
             
+             <!-- Add Ship To Address field -->
+             <label for="addNotes"><strong>Notes:</strong></label>
+             <textarea id="addNotes" name="addNotes"  cols="30" placeholder="Add a note.." class="form-box add-notes no-border"></textarea>
         </div>
         <div class="top-container">
 
@@ -41,7 +45,10 @@
             <h4>Sample(s) Added:</h4>
             <div id="line-items-container"></div>
             
-            <button type="button" id="print-btn" class="no-print">Print</button>
+            <div class="btn-container">
+                <button type="button" id="clear-btn" class="no-print clear-btn">Clear</button>
+                <button type="button" id="print-btn" class="no-print print-btn">Print</button>
+            </div>
         </div>
     </form>
     
